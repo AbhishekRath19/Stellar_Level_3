@@ -3,7 +3,7 @@
 A premium NFT Gallery built with **Next.js** and **Soroban**. Users can connect their **Freighter** wallet, view owned NFTs, and mint new ones on the Stellar Testnet.
 
 ## 🚀 Live Demo
-[View Live Demo](https://stellar-nft-gallery.vercel.app/)
+[View Live Demo](https://stellar-level-3-git-main-abhishekrath19s-projects.vercel.app/)
 
 ## 🎥 Demo Video
 ![Demo Video](./public/Video%20Project.mp4)
