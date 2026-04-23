@@ -9,7 +9,7 @@ A premium NFT Gallery built with **Next.js** and **Soroban**. Users can connect 
 [Click here to watch the Demo Video](./public/Video%20Project.mp4)
 
 ## 📸 Project Screenshot
-[View Project Screenshot](./public/screenshot.png)
+![NFT Gallery Screenshot](./public/screenshot.png)
 
 ## 🛠️ Tech Stack
 
