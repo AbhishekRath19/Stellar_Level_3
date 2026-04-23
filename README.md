@@ -6,7 +6,10 @@ A premium NFT Gallery built with **Next.js** and **Soroban**. Users can connect 
 [View Live Demo](https://stellar-level-3-git-main-abhishekrath19s-projects.vercel.app/)
 
 ## 🎥 Demo Video
-[Click here to watch the Demo Video](./public/Video%20Project.mp4)
+The full functionality demo video is located in the repository at:  
+`./public/Video Project.mp4`  
+
+*(Please download the file from the public folder to view the 1-minute walkthrough.)*
 
 ## 📸 Project Screenshot
 ![NFT Gallery Screenshot](./public/screenshot.png)
