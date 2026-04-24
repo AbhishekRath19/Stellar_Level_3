@@ -1,4 +1,4 @@
-﻿import freighter from "@stellar/freighter-api";
+import freighter from "@stellar/freighter-api";
 const { isConnected, getAddress, signTransaction } = freighter;
 import { 
   Horizon, 
@@ -23,11 +23,27 @@ const getServer = () => {
 };
 
 export const connectFreighter = async () => {
-  if (await isConnected()) {
-    const { address } = await getAddress();
+  try {
+    const isReady = await isConnected();
+    if (!isReady) {
+      throw new Error("Freighter extension not found or not ready.");
+    }
+
+    const { address, error } = await getAddress();
+    
+    if (error) {
+      throw new Error(error);
+    }
+
+    if (!address) {
+      throw new Error("No address returned from Freighter.");
+    }
+
     return address;
+  } catch (err: any) {
+    console.error("Freighter connection error:", err);
+    throw err;
   }
-  throw new Error("Freighter not connected");
 };
 
 export const getAccountInfo = async (publicKey: string) => {

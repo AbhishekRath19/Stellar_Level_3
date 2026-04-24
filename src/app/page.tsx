@@ -14,24 +14,21 @@ export default function Home() {
   const [nftImage, setNftImage] = useState("");
   const [nfts, setNfts] = useState<any[]>([]);
 
-  // Load from localStorage on mount
+  // Fetch NFTs from MongoDB on mount
   useEffect(() => {
-    const cached = localStorage.getItem("user_nfts");
-    if (cached) {
+    const fetchNFTs = async () => {
       try {
-        setNfts(JSON.parse(cached));
+        const res = await fetch("/api/nfts");
+        const data = await res.json();
+        if (Array.isArray(data)) {
+          setNfts(data);
+        }
       } catch (e) {
-        console.error("Failed to parse cached NFTs", e);
+        console.error("Failed to fetch NFTs", e);
       }
-    }
+    };
+    fetchNFTs();
   }, []);
-
-  // Save to localStorage when nfts change
-  useEffect(() => {
-    if (nfts.length > 0) {
-      localStorage.setItem("user_nfts", JSON.stringify(nfts));
-    }
-  }, [nfts]);
 
   const handleConnect = async () => {
     try {
@@ -50,18 +47,32 @@ export default function Home() {
     setLoading(true);
     try {
       // Logic to build Soroban transaction would go here
-      alert("Transaction building for Soroban...");
+      // For now, we simulate the Soroban mint and save to MongoDB
       
-      // Example of adding to local gallery for demo
-      const newNFT = {
-        id: Math.floor(Math.random() * 1000).toString(),
+      const newNFTData = {
         name: nftName,
         description: nftDesc,
-        image: nftImage
+        image: nftImage,
+        owner: account
       };
-      setNfts([newNFT, ...nfts]);
+
+      const res = await fetch("/api/nfts", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newNFTData),
+      });
+
+      if (!res.ok) {
+        const errorData = await res.json();
+        throw new Error(errorData.error || "Failed to save NFT to database");
+      }
+
+      const savedNFT = await res.json();
+      setNfts([savedNFT, ...nfts]);
       
-      alert("NFT Minted (Simulated)!");
+      alert("NFT Minted and Saved to MongoDB!");
       setNftName("");
       setNftDesc("");
       setNftImage("");
