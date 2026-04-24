@@ -1,5 +1,9 @@
-import freighter from "@stellar/freighter-api";
-const { isConnected, getAddress, signTransaction } = freighter;
+import { 
+  isConnected, 
+  setAllowed, 
+  getAddress, 
+  signTransaction 
+} from "@stellar/freighter-api";
 import { 
   Horizon, 
   TransactionBuilder, 
@@ -26,7 +30,13 @@ export const connectFreighter = async () => {
   try {
     const isReady = await isConnected();
     if (!isReady) {
-      throw new Error("Freighter extension not found or not ready.");
+      throw new Error("Freighter extension not found. Please install it from the Chrome Web Store.");
+    }
+
+    // Explicitly request access if not already allowed
+    const allowed = await setAllowed();
+    if (!allowed) {
+      throw new Error("Access to Freighter was denied. Please allow this site to connect.");
     }
 
     const { address, error } = await getAddress();
@@ -36,7 +46,7 @@ export const connectFreighter = async () => {
     }
 
     if (!address) {
-      throw new Error("No address returned from Freighter.");
+      throw new Error("No address returned from Freighter. Make sure you are logged in and have an account.");
     }
 
     return address;
