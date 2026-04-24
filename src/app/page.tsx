@@ -121,7 +121,7 @@ export default function Home() {
             />
             <input 
               className="input" 
-              placeholder="Image URL" 
+              placeholder="Image URL (e.g. https://...)" 
               value={nftImage} 
               onChange={(e) => setNftImage(e.target.value)} 
               required 
