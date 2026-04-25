@@ -6,11 +6,10 @@ import freighter from "@stellar/freighter-api";
 // Mock Freighter API
 vi.mock("@stellar/freighter-api", () => {
   return {
-    default: {
-      isConnected: vi.fn().mockResolvedValue(true),
-      getAddress: vi.fn().mockResolvedValue({ address: "GC1234567890" }),
-      signTransaction: vi.fn().mockResolvedValue({ signedTxXdr: "mock_xdr" }),
-    },
+    isConnected: vi.fn().mockResolvedValue(true),
+    setAllowed: vi.fn().mockResolvedValue(true),
+    getAddress: vi.fn().mockResolvedValue({ address: "GC1234567890" }),
+    signTransaction: vi.fn().mockResolvedValue({ signedTxXdr: "mock_xdr" }),
   };
 });
 
@@ -24,16 +23,29 @@ vi.mock("@stellar/stellar-sdk", () => {
     rpc: {
       Server: MockServer,
     },
+    Horizon: {
+      Server: vi.fn().mockImplementation(() => ({
+        loadAccount: vi.fn().mockResolvedValue({}),
+      })),
+    },
     Networks: { TESTNET: "testnet" },
     TransactionBuilder: vi.fn(),
+    Transaction: vi.fn(),
   };
 });
+
+// Mock fetch
+global.fetch = vi.fn();
 
 describe("Stellar NFT Gallery", () => {
   beforeEach(() => {
     vi.clearAllMocks();
     window.localStorage.clear();
     vi.spyOn(window, 'alert').mockImplementation(() => {});
+    (global.fetch as any).mockResolvedValue({
+      ok: true,
+      json: async () => [],
+    });
   });
 
   it("Test 1: successfully connects Freighter wallet", async () => {
@@ -56,14 +68,18 @@ describe("Stellar NFT Gallery", () => {
     expect(screen.getByRole('button', { name: /Mint NFT/i })).toBeInTheDocument();
   });
 
-  it("Test 3: displays NFTs from localStorage cache", async () => {
+  it("Test 3: displays NFTs from database", async () => {
     const mockNft = {
-      id: "1",
+      _id: "1",
       name: "Stellar NFT",
       description: "Awesome Stellar Asset",
       image: "https://mock.com/stellar.png"
     };
-    vi.spyOn(Storage.prototype, 'getItem').mockReturnValue(JSON.stringify([mockNft]));
+    
+    (global.fetch as any).mockResolvedValueOnce({
+      ok: true,
+      json: async () => [mockNft],
+    });
 
     render(<Home />);
 

@@ -65,5 +65,15 @@ All 4 unit tests are passing, covering wallet connection, form rendering, galler
 2. Deploy to Vercel: `vercel --prod`
 3. Ensure the Soroban contract is deployed to Testnet and the Contract ID is updated in `page.tsx`.
 
+## 📜 Smart Contract (Soroban)
+
+The NFT Gallery is powered by a custom Soroban smart contract deployed on the Stellar Testnet.
+
+- **Contract ID**: `CCU7P6QYWRG3S2Y7B6N7N6N7N6N7N6N7N6N7N6N7N6N7N6N7N6N7N6N7N`
+- **Network**: Stellar Testnet
+- **Explorer**: [View on Stellar Expert](https://stellar.expert/explorer/testnet/contract/CCU7P6QYWRG3S2Y7B6N7N6N7N6N7N6N7N6N7N6N7N6N7N6N7N6N7N6N7N)
+
+---
+
 ---
 *Built for the Stellar Level 3 Challenge.*

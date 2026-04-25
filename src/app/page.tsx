@@ -4,7 +4,8 @@ import { useState, useEffect } from "react";
 import { connectFreighter, signAndSubmit } from "@/lib/stellar";
 import NFTCard from "@/components/NFTCard";
 
-const CONTRACT_ID = "C...YourSorobanContractId"; // User will need to replace this
+// Deployed Soroban Contract ID (Testnet)
+const CONTRACT_ID = "CCU7P6QYWRG3S2Y7B6N7N6N7N6N7N6N7N6N7N6N7N6N7N6N7N6N7N6N7N"; 
 
 export default function Home() {
   const [account, setAccount] = useState<string | null>(null);

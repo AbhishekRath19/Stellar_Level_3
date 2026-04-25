@@ -15,7 +15,8 @@ describe('NFTCard', () => {
 
     expect(screen.getByText('Test NFT')).toBeDefined();
     expect(screen.getByText('Test Description')).toBeDefined();
-    expect(screen.getByText('Token ID: #1')).toBeDefined();
+    expect(screen.getByText(/Token ID:/i)).toBeDefined();
+    expect(screen.getByText('1')).toBeDefined();
     const img = screen.getByRole('img');
     expect(img).toHaveAttribute('src', props.image);
     expect(img).toHaveAttribute('alt', props.name);
