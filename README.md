@@ -58,7 +58,7 @@ All 4 unit tests are passing, covering wallet connection, form rendering, galler
 - `src/app/page.tsx`: Main dashboard with wallet connection and minting logic.
 - `src/lib/stellar.ts`: Stellar SDK and Freighter integration helpers.
 - `src/components/`: Reusable UI components.
-- `soroban/`: Soroban smart contract source code (Rust).
+- `contract/`: Soroban smart contract source code (Rust).
 
 ### Deployment
 1. Build the project: `npm run build`

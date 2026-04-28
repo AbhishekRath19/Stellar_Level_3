@@ -1,0 +1,1 @@
+C:\Users\abhis\OneDrive\Desktop\Stellar\Stellar\ Level\ 3\contract\target\wasm32-unknown-unknown\release\nft_gallery_contract.wasm: C:\Users\abhis\OneDrive\Desktop\Stellar\Stellar\ Level\ 3\contract\src\lib.rs
